@@ -289,7 +289,7 @@ class Window7(QWidget):
         self.postPurge1()
         self.b1 = self.exitButton()
         self.b2 = self.nextButton()
-        self.b2.setDisabled()
+        # self.b2.setDisabled() # WILL FIX THIS EVENTUALLY
         self.b2.clicked.connect(lambda: self.window8())
         layout.addWidget(idlbl, 0, 0, 1, 1)
         layout.addWidget(img, 0, 1, 1, 1)
@@ -331,7 +331,7 @@ class Window7(QWidget):
         valve1.disable()
         valve2.disable()
         valve3.disable()
-        self.b2.setEnabled(s)
+        # self.b2.setEnabled(s) # WILL FIX THIS EVENTUALLY
 
     def window8(self):
         self.w8 = Window8()
