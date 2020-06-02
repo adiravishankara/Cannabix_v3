@@ -388,6 +388,7 @@ class Window6(QWidget):
         startTime = time.time()
 
         def saveData(data):
+            global directory
             np.savetxt('{}/{}_id{}.csv'.format(directory, datetime.now().strftime('%Y_%m_%d_%H%M%S'), idVal), data, fmt='%.10f', delimiter=',')
             print('File Saved')
 
@@ -693,6 +694,8 @@ class lsWindow(QWidget):
         if check:
             global idVal
             idVal = idCheck
+            global directory
+            directory = 'Data/byID/id{}'.format(idVal)
             self.w3 = Window3()
             self.w3.show()
             self.close()
