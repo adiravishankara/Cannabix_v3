@@ -37,9 +37,9 @@ pTime2 = 30 # Pre-purge: this will normally run for 30 seconds
 pTime3 = 2 # Pre-purge: this is commented out
 pTime4 = 40 # Post-purge: this will normally run for 40 seconds
 
-totTime = 6 # This is the total time: normally 300 seconds
-tTime1 = 2 # This is the time when the sensor is extended: Normally 10
-tTime2 = 4 # This is the time when the sensor is retracted: Normally 60
+totTime = 300 # This is the total time: normally 300 seconds
+tTime1 = 10 # This is the time when the sensor is extended: Normally 10
+tTime2 = 60 # This is the time when the sensor is retracted: Normally 60
 
 w = 320
 h = 240
