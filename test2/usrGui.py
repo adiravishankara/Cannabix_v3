@@ -105,7 +105,7 @@ class LinearActuator:
         self.pwm.start(8.5)
         timestart = time.time()
         while (time.time() - timestart) < 1.5:
-            # time.sleep(0.1)
+            time.sleep(0.1)
             # app.processEvents()
             pass
         GPIO.output(self.pinEnable, GPIO.LOW)
@@ -117,8 +117,8 @@ class LinearActuator:
         extending = 5.3  # 5.3
         self.pwm.ChangeDutyCycle(extending)
         timestart = time.time()
-        while ((time.time() - timestart) < 1.5):
-            # time.sleep(0.1)
+        while (time.time() - timestart) < 1.5:
+            time.sleep(0.1)
             # app.processEvents() #5.3
             pass
         # print('Extended at',extending)
@@ -130,8 +130,8 @@ class LinearActuator:
         GPIO.output(self.pinEnable, GPIO.HIGH)
         self.pwm.ChangeDutyCycle(8.5)
         timestart = time.time()
-        while ((time.time() - timestart) < 1.5):
-            # time.sleep(0.1)
+        while (time.time() - timestart) < 1.5:
+            time.sleep(0.1)
             # app.processEvents()
             pass
         GPIO.output(self.pinEnable, GPIO.LOW)
@@ -141,7 +141,11 @@ class LinearActuator:
         # print('Moving linear actuator to default (center) position.')
         GPIO.output(self.pinEnable, GPIO.HIGH)
         self.pwm.ChangeDutyCycle(6)
-        time.sleep(1.5)
+        timestart = time.time()
+        while (time.time() - timestart) < 1.5:
+            time.sleep(0.1)
+            # app.processEvents()
+            pass
         GPIO.output(self.pinEnable, GPIO.LOW)
         self.state = 'd'
 
@@ -399,11 +403,17 @@ class Window6(QWidget):
             print('Updating PG, val: {}'.format(self.aVal))
 
             if 0 < self.aVal < tTime1:
-                la.retract()
+                if la.state != 'r':
+                    la.retract()
+                    print('Retracting LA')
             if tTime1 < self.aVal < tTime2:
-                la.extend()
+                if la.state != 'e':
+                    la.extend()
+                    print('Extending LA')
             if tTime2 < self.aVal < totTime:
-                la.retract()
+                if la.state != 'r':
+                    la.retract()
+                    print('Retracting LA')
             if self.aVal == (totTime + 1):
                 pgTimer.stop()
                 # pgTimer.killTimer()
