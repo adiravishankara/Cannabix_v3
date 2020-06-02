@@ -386,7 +386,7 @@ class Window6(QWidget):
         valve2.disable()
         valve3.disable()
         startTime = time.time()
-        print('STEP 1')
+        print('STEP 1: setting up components')
         def saveData(data):
             global directory
             np.savetxt('{}/{}_id{}.csv'.format(directory, datetime.now().strftime('%Y_%m_%d_%H%M%S'), idVal), data, fmt='%.10f', delimiter=',')
@@ -422,10 +422,10 @@ class Window6(QWidget):
 
         pgTimer = QTimer()
         pgTimer.timeout.connect(lambda: updatePG())
-        print('created pgTimer')
+        print('STEP2: created pgTimer')
         dataTimer = QTimer()
         dataTimer.timeout.connect(lambda: updateData())
-        print()
+        print('STEP3: created DataTimer')
         dataTimer.start(100)
         pgTimer.start(1000)
 
