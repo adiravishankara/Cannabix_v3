@@ -372,7 +372,7 @@ class Window6(QWidget):
         layout.addWidget(label)
         self.pgBar = QProgressBar(self)
         # self.pgBar.setGeometry()
-        self.pgBar.setMaximum(pTime1)
+        self.pgBar.setMaximum(totTime)
         self.pgBar.setValue(0)
         layout.addWidget(self.pgBar)
         self.setLayout(layout)
@@ -387,6 +387,7 @@ class Window6(QWidget):
         valve3.disable()
         startTime = time.time()
         print('STEP 1: setting up components')
+
         def saveData(data):
             global directory
             np.savetxt('{}/{}_id{}.csv'.format(directory, datetime.now().strftime('%Y_%m_%d_%H%M%S'), idVal), data, fmt='%.10f', delimiter=',')
