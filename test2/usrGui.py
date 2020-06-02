@@ -11,8 +11,11 @@ from datetime import datetime
 from pandas import read_csv as rc
 import pyqtgraph as pg
 import RPi.GPIO as GPIO
+import Adafruit_ADS1x15 as ads
 
 GPIO.setmode(GPIO.BOARD)
+adc1 = ads.ADS1115(0x48)
+adc2 = ads.ADS1115(0x48)
 
 # global bg_color
 bg_color = '#484848'
@@ -49,7 +52,7 @@ sens1name = '2602'
 sens2name = '2603'
 sens3name = '2610'
 
-time = []
+run_time = []
 sens1 = []
 sens2 = []
 sens3 = []
@@ -234,7 +237,7 @@ class Window8(QWidget):
         self.setLayout(layout)
 
     def startNewTest(self):
-        runtime = []
+        run_time = []
         sens1 = []
         sens2 = []
         sens3 = []
@@ -298,22 +301,23 @@ class Window7(QWidget):
         self.setLayout(layout)
 
     def plotGraph(self):
-        self.graph.plot(time, sens1, pen='r', name='{}'.format(sens1name))
-        self.graph.plot(time, sens2, pen='g', name='{}'.format(sens2name))
-        self.graph.plot(time, sens3, pen='b', name='{}'.format(sens3name))
+        self.graph.plot(run_time, sens1, pen='r', name='{}'.format(sens1name))
+        self.graph.plot(run_time, sens2, pen='g', name='{}'.format(sens2name))
+        self.graph.plot(run_time, sens3, pen='b', name='{}'.format(sens3name))
 
     def mlResults(self):
         print('Doing ML')
-        SamplesPerSecond = 10
-        import dill
-        dillfile = 'Model.sav'
-        p = dill.load(open(dillfile,'rb'))
-        data = p(all_data)
-        print(data)
-        if data == 'THC Detected':
-            thc_status = True
-        else:
-            thc_status = False
+        thc_status = True
+        # SamplesPerSecond = 10
+        # import dill
+        # dillfile = 'Model.sav'
+        # p = dill.load(open(dillfile,'rb'))
+        # data = p(all_data)
+        # print(data)
+        # if data == 'THC Detected':
+        #     thc_status = True
+        # else:
+        #     thc_status = False
 
     def postPurge1(self):
         QTimer.singleShot(pTimer4, lambda: self.postPurge2)
@@ -327,7 +331,6 @@ class Window7(QWidget):
         valve1.disable()
         valve2.disable()
         valve3.disable()
-        GPIO.cleanup()
         self.b2.setEnabled(s)
 
     def window8(self):
@@ -406,11 +409,10 @@ class Window6(QWidget):
                 all_data = np.column_stack((time, sens1, sens2, sens3))
                 saveData(all_data)
                 print('Data Collection Complete, Moving to ML')
-                #GPIO.cleanup()
                 self.window7()
 
         def updateData():
-            runtime.append(time.time() - startTime)
+            run_time.append(time.time() - startTime)
             sens1.append(mos1.read())
             sens2.append(mos2.read())
             sens3.append(mos3.read())
