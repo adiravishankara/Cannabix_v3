@@ -320,7 +320,7 @@ class Window7(QWidget):
         #     thc_status = False
 
     def postPurge1(self):
-        QTimer.singleShot(pTimer4, lambda: self.postPurge2)
+        QTimer.singleShot(pTime4, lambda: self.postPurge2)
         la.default()
         valve1.enable()
         valve2.enable()
