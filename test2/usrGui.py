@@ -405,9 +405,9 @@ class Window6(QWidget):
                 la.retract()
             if self.aVal == (totTime + 1):
                 pgTimer.stop()
-                pgTimer.killTimer()
+                # pgTimer.killTimer()
                 dataTimer.stop()
-                dataTimer.killTimer()
+                # dataTimer.killTimer()
                 global all_data
                 all_data = np.column_stack((run_time, sens1, sens2, sens3))
                 saveData(all_data)
@@ -545,7 +545,7 @@ class Window4(QWidget):
             print('Updating PG, val: {}'.format(self.bVal))
             if self.bVal == (pTime2 + 1):
                 timer3.stop()
-                timer3.killTimer()
+                # timer3.killTimer()
                 valve1.disable()
                 valve2.disable()
                 valve3.disable()
@@ -574,7 +574,7 @@ class Window4(QWidget):
             print('Updating PG, val: {}'.format(self.aVal))
             if self.aVal == (pTime1 + 1):
                 timer2.stop()
-                timer2.killTimer()
+                #timer2.killTimer()
                 valve1.disable()
                 print('Moving to step 2')
                 self.purge2()
