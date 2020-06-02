@@ -406,7 +406,7 @@ class Window6(QWidget):
                 pgTimer.stop()
                 dataTimer.stop()
                 global all_data
-                all_data = np.column_stack((time, sens1, sens2, sens3))
+                all_data = np.column_stack((run_time, sens1, sens2, sens3))
                 saveData(all_data)
                 print('Data Collection Complete, Moving to ML')
                 self.window7()
