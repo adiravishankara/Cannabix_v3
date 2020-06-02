@@ -700,6 +700,7 @@ class lsWindow(QWidget):
             global idVal
             idVal = idCheck
             global directory
+            print('Loading subject {}'.format(idVal))
             directory = 'Data/byID/id{}'.format(idVal)
             self.w3 = Window3()
             self.w3.show()
