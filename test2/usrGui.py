@@ -420,7 +420,7 @@ class Window6(QWidget):
         pgTimer = QTimer()
         pgTimer.timeout.connect(lambda: updatePG())
         dataTimer = QTimer()
-        dataTimer.connect(lambda: updateData())
+        dataTimer.timeout.connect(lambda: updateData())
         dataTimer.start(100)
         pgTimer.start(1000)
 
