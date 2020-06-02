@@ -410,6 +410,8 @@ class Window6(QWidget):
                 all_data = np.column_stack((run_time, sens1, sens2, sens3))
                 saveData(all_data)
                 print('Data Collection Complete, Moving to ML')
+                pgTimer.setInterval(0)
+                dataTimer.setInterval(0)
                 self.window7()
 
         def updateData():
@@ -541,7 +543,7 @@ class Window4(QWidget):
             print('Updating PG, val: {}'.format(self.bVal))
             if self.bVal == (pTime2 + 1):
                 timer3.stop()
-
+                timer3.setInterval(0)
                 valve1.disable()
                 valve2.disable()
                 valve3.disable()
@@ -570,6 +572,7 @@ class Window4(QWidget):
             print('Updating PG, val: {}'.format(self.aVal))
             if self.aVal == (pTime1 + 1):
                 timer2.stop()
+                timer2.setInterval(0)
                 valve1.disable()
                 print('Moving to step 2')
                 self.purge2()
