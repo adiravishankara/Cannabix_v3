@@ -32,14 +32,14 @@ idVal = 0
 filename = ''
 directory = ''
 
-pTime1 = 2 # Pre-purge: this will normally run for 60 seconds
-pTime2 = 2 # Pre-purge: this will normally run for 30 seconds
+pTime1 = 60 # Pre-purge: this will normally run for 60 seconds
+pTime2 = 30 # Pre-purge: this will normally run for 30 seconds
 pTime3 = 2 # Pre-purge: this is commented out
-pTime4 = 2 # Post-purge: this will normally run for 40 seconds
+pTime4 = 40 # Post-purge: this will normally run for 40 seconds
 
-totTime = 6 # This is the total time
-tTime1 = 2 # This is the time when the sensor is extended
-tTime2 = 4 # This is the time when the sensor is retracted
+totTime = 6 # This is the total time: normally 300 seconds
+tTime1 = 2 # This is the time when the sensor is extended: Normally 10
+tTime2 = 4 # This is the time when the sensor is retracted: Normally 60
 
 w = 320
 h = 240
@@ -510,24 +510,24 @@ class Window4(QWidget):
         valve2.enable()
         valve3.enable()
 
-        # def updatePG3():
-        #     self.pgBar.setValue(self.cVal)
-        #     self.cVal += 1
-        #     print('Updating PG, val: {}'.format(self.cVal))
-        #     if self.cVal == (pTime3 + 1):
-        #         timer4.stop()
-        #
-        #         valve1.disable()
-        #         valve2.disable()
-        #         valve3.disable()
-        #         la.retract()
-        #
-        #         print('Moving to testing')
-        #         self.window5()
-        #
-        #     timer4 = QTimer()
-        #     timer4.timeout.connect(lambda: updatePG3())
-        #     timer4.start(1000)
+        def updatePG3():
+            self.pgBar.setValue(self.cVal)
+            self.cVal += 1
+            print('Updating PG, val: {}'.format(self.cVal))
+            if self.cVal == (pTime3 + 1):
+                timer4.stop()
+
+                valve1.disable()
+                valve2.disable()
+                valve3.disable()
+                la.retract()
+
+                print('Moving to testing')
+                self.window5()
+
+            timer4 = QTimer()
+            timer4.timeout.connect(lambda: updatePG3())
+            timer4.start(1000)
 
     def purge2(self):
         print('This is purge 2')
