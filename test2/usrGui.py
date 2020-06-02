@@ -386,7 +386,7 @@ class Window6(QWidget):
         valve2.disable()
         valve3.disable()
         startTime = time.time()
-
+        print('STEP 1')
         def saveData(data):
             global directory
             np.savetxt('{}/{}_id{}.csv'.format(directory, datetime.now().strftime('%Y_%m_%d_%H%M%S'), idVal), data, fmt='%.10f', delimiter=',')
@@ -405,13 +405,13 @@ class Window6(QWidget):
                 la.retract()
             if self.aVal == (totTime + 1):
                 pgTimer.stop()
+                pgTimer.killTimer()
                 dataTimer.stop()
+                dataTimer.killTimer()
                 global all_data
                 all_data = np.column_stack((run_time, sens1, sens2, sens3))
                 saveData(all_data)
                 print('Data Collection Complete, Moving to ML')
-                pgTimer.setInterval(0)
-                dataTimer.setInterval(0)
                 self.window7()
 
         def updateData():
@@ -422,8 +422,10 @@ class Window6(QWidget):
 
         pgTimer = QTimer()
         pgTimer.timeout.connect(lambda: updatePG())
+        print('created pgTimer')
         dataTimer = QTimer()
         dataTimer.timeout.connect(lambda: updateData())
+        print()
         dataTimer.start(100)
         pgTimer.start(1000)
 
@@ -543,7 +545,7 @@ class Window4(QWidget):
             print('Updating PG, val: {}'.format(self.bVal))
             if self.bVal == (pTime2 + 1):
                 timer3.stop()
-                timer3.setInterval(0)
+                timer3.killTimer()
                 valve1.disable()
                 valve2.disable()
                 valve3.disable()
@@ -572,7 +574,7 @@ class Window4(QWidget):
             print('Updating PG, val: {}'.format(self.aVal))
             if self.aVal == (pTime1 + 1):
                 timer2.stop()
-                timer2.setInterval(0)
+                timer2.killTimer()
                 valve1.disable()
                 print('Moving to step 2')
                 self.purge2()
