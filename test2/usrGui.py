@@ -423,11 +423,13 @@ class Window6(QWidget):
         dataTimer = QTimer()
         dataTimer.timeout.connect(lambda: updateData())
         print('STEP3: created DataTimer')
-        dataTimer.start(100)
-        pgTimer.start(1000)
         QTimer.singleShot(tTime1, lambda: la.extend())
         QTimer.singleShot(tTime2, lambda: la.retract())
         QTimer.singleShot(totTime, lambda: endTest())
+        print('STEP4: Single Shot Timers started')
+        dataTimer.start(100)
+        pgTimer.start(1000)
+
 
 
     def window7(self):
