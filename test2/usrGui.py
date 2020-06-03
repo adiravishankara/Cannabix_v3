@@ -401,21 +401,21 @@ class Window6(QWidget):
             self.pgBar.setValue(self.aVal)
             self.aVal += 1
             print('Updating PG, val: {}'.format(self.aVal))
-                pgTimer.stop()
-                # pgTimer.killTimer()
-                dataTimer.stop()
-                # dataTimer.killTimer()
-                global all_data
-                all_data = np.column_stack((run_time, sens1, sens2, sens3))
-                saveData(all_data)
-                print('Data Collection Complete, Moving to ML')
-                self.window7()
 
         def updateData():
             run_time.append(time.time() - startTime)
             sens1.append(mos1.read())
             sens2.append(mos2.read())
             sens3.append(mos3.read())
+
+        def endTest():
+            pgTimer.stop()
+            dataTimer.stop()
+            global all_data
+            all_data = np.column_stack((run_time, sens1, sens2, sens3))
+            saveData(all_data)
+            print('Data Collection Complete, Moving to ML')
+            self.window7()
 
         pgTimer = QTimer()
         pgTimer.timeout.connect(lambda: updatePG())
@@ -425,6 +425,9 @@ class Window6(QWidget):
         print('STEP3: created DataTimer')
         dataTimer.start(100)
         pgTimer.start(1000)
+        QTimer.singleShot(tTime1, lambda: la.extend())
+        QTimer.singleShot(tTime2, lambda: la.retract())
+        QTimer.singleShot(totTime, lambda: endTest())
 
 
     def window7(self):
