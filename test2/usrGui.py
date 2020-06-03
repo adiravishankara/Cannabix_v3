@@ -401,20 +401,6 @@ class Window6(QWidget):
             self.pgBar.setValue(self.aVal)
             self.aVal += 1
             print('Updating PG, val: {}'.format(self.aVal))
-
-            if 0 < self.aVal < tTime1:
-                if la.state != 'r':
-                    la.retract()
-                    print('Retracting LA')
-            if tTime1 < self.aVal < tTime2:
-                if la.state != 'e':
-                    la.extend()
-                    print('Extending LA')
-            if tTime2 < self.aVal < totTime:
-                if la.state != 'r':
-                    la.retract()
-                    print('Retracting LA')
-            if self.aVal == (totTime + 1):
                 pgTimer.stop()
                 # pgTimer.killTimer()
                 dataTimer.stop()
