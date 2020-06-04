@@ -32,14 +32,14 @@ idVal = 0
 filename = ''
 directory = ''
 
-pTime1 = 60 # Pre-purge: this will normally run for 60 seconds
-pTime2 = 30 # Pre-purge: this will normally run for 30 seconds
+pTime1 = 2 # Pre-purge: this will normally run for 60 seconds
+pTime2 = 2 # Pre-purge: this will normally run for 30 seconds
 pTime3 = 2 # Pre-purge: this is commented out
-pTime4 = 40 # Post-purge: this will normally run for 40 seconds
+pTime4 = 2 # Post-purge: this will normally run for 40 seconds
 
-totTime = 300 # This is the total time: normally 300 seconds
-tTime1 = 10 # This is the time when the sensor is extended: Normally 10
-tTime2 = 60 # This is the time when the sensor is retracted: Normally 60
+totTime = 20 # This is the total time: normally 300 seconds
+tTime1 = 5 # This is the time when the sensor is extended: Normally 10
+tTime2 = 10 # This is the time when the sensor is retracted: Normally 60
 
 w = 320
 h = 240
