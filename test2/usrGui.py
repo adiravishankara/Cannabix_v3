@@ -411,6 +411,7 @@ class Window6(QWidget):
         def endTest():
             pgTimer.stop()
             dataTimer.stop()
+            print('Stopping Timers')
             global all_data
             all_data = np.column_stack((run_time, sens1, sens2, sens3))
             saveData(all_data)
@@ -423,9 +424,9 @@ class Window6(QWidget):
         dataTimer = QTimer()
         dataTimer.timeout.connect(lambda: updateData())
         print('STEP3: created DataTimer')
-        QTimer.singleShot(tTime1, lambda: la.extend())
-        QTimer.singleShot(tTime2, lambda: la.retract())
-        QTimer.singleShot(totTime, lambda: endTest())
+        QTimer.singleShot(tTime1, la.extend())
+        QTimer.singleShot(tTime2, la.retract())
+        QTimer.singleShot(totTime, endTest())
         print('STEP4: Single Shot Timers started')
         dataTimer.start(100)
         pgTimer.start(1000)
