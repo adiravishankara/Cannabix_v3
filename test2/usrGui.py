@@ -418,9 +418,9 @@ class Window6(QWidget):
             print('Data Collection Complete, Moving to ML')
             self.window7()
 
-        QTimer.singleShot(tTime1, lambda: print('R1: Extending LA'))
-        QTimer.singleShot(tTime2, lambda: print('R2: Retracting LA'))
-        QTimer.singleShot(totTime, lambda: print('R2: Ending Test'))
+        QTimer.singleShot(tTime1*1000, lambda: la.extend())
+        QTimer.singleShot(tTime2*1000, lambda: la.retract())
+        QTimer.singleShot(totTime*1000, lambda: endTest())
         pgTimer = QTimer()
         pgTimer.timeout.connect(lambda: updatePG())
         print('STEP2: created pgTimer')
