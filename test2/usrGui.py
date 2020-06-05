@@ -103,12 +103,7 @@ class LinearActuator:
         GPIO.output(self.pinEnable, GPIO.HIGH)
         self.pwm = GPIO.PWM(pinLA, 50)
         self.pwm.start(8.5)
-        timestart = time.time()
-        while (time.time() - timestart) < 1.5:
-            time.sleep(0.1)
-            # app.processEvents()
-            pass
-        GPIO.output(self.pinEnable, GPIO.LOW)
+        QTimer.singleShot(1.5*1000, lambda: GPIO.output(self.pinEnable, GPIO.LOW))
         self.state = 'r'
 
     def extend(self):
@@ -116,37 +111,21 @@ class LinearActuator:
         GPIO.output(self.pinEnable, GPIO.HIGH)
         extending = 5.3  # 5.3
         self.pwm.ChangeDutyCycle(extending)
-        timestart = time.time()
-        while (time.time() - timestart) < 1.5:
-            time.sleep(0.1)
-            # app.processEvents() #5.3
-            pass
-        # print('Extended at',extending)
-        GPIO.output(self.pinEnable, GPIO.LOW)
+        QTimer.singleShot(1.5*1000, lambda: GPIO.output(self.pinEnable, GPIO.LOW))
         self.state = 'e'
 
     def retract(self):
         # print('Retracting linear actuator.')
         GPIO.output(self.pinEnable, GPIO.HIGH)
         self.pwm.ChangeDutyCycle(8.5)
-        timestart = time.time()
-        while (time.time() - timestart) < 1.5:
-            time.sleep(0.1)
-            # app.processEvents()
-            pass
-        GPIO.output(self.pinEnable, GPIO.LOW)
+        QTimer.singleShot(1.5*1000, lambda: GPIO.output(self.pinEnable, GPIO.LOW))
         self.state = 'r'
 
     def default(self):
         # print('Moving linear actuator to default (center) position.')
         GPIO.output(self.pinEnable, GPIO.HIGH)
         self.pwm.ChangeDutyCycle(6)
-        timestart = time.time()
-        while (time.time() - timestart) < 1.5:
-            time.sleep(0.1)
-            # app.processEvents()
-            pass
-        GPIO.output(self.pinEnable, GPIO.LOW)
+        QTimer.singleShot(1.5*1000, lambda: GPIO.output(self.pinEnable, GPIO.LOW))
         self.state = 'd'
 
 
@@ -431,7 +410,6 @@ class Window6(QWidget):
         print('STEP4: Single Shot Timers started')
         dataTimer.start(100)
         pgTimer.start(1000)
-
 
 
     def window7(self):
