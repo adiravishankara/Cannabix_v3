@@ -247,7 +247,7 @@ class Window7(QWidget):
             self.setText('Next')
 
     class Graph(pg.PlotWidget):
-        def __init(self, parent=None):
+        def __init__(self, parent=None):
             super(Window7.graph, self).__init__()
             self.setStyleSheet("pg.PlotWidget {border-style: outset; max-height: 50}")
 
