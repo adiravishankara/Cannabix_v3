@@ -245,6 +245,21 @@ class Frontpage(QWidget):
 
 
 class Subjectpage(QWidget):
+    class load_subject(QPushButton):
+        def __init__(self, parent=None):
+            super(Subjectpage.load_subject, self).__init__()
+            self.setText('Load Subject')
+
+    class new_subject(QPushButton):
+        def __init__(self, parent=None):
+            super(Subjectpage.new_subject, self).__init__()
+            self.setText('New Subject')
+
+    class addLog(QPushButton):
+        def __init__(self, parent=None):
+            super(Subjectpage.addLog, self).__init__()
+            self.setText('Add Log')
+            
     def __init__(self, *args, **kwargs):
         super(Subjectpage, self).__init__(*args, **kwargs)
         self.UI()
@@ -258,7 +273,9 @@ class Subjectpage(QWidget):
 
         self.layout.addWidget(self.idL, 0, 6, 1, 1)
         self.layout.addWidget(self.appStat, 7, 6, 1, 1)
-
+        self.layout.addWidget(self.new_subject(), 2, 1, 1, 3)
+        self.layout.addWidget(self.load_subject(), 4, 1, 1, 3)
+        self.layout.addWidget(self.addLog(), 3, 5, 1, 2)
         self.setLayout(self.layout)
 
 
@@ -348,9 +365,9 @@ class mainWindow(QWidget):
     def UI(self):
         self.layout = QGridLayout()
         tab = QTabWidget()
-        tab.addTab(Frontpage(), 'Tab 1')
-        tab.addTab(Subjectpage(), 'Tab 2')
-        tab.addTab(Datapage(), 'Tab 3')
+        tab.addTab(Frontpage(), 'Main')
+        tab.addTab(Subjectpage(), 'Subject')
+        tab.addTab(Datapage(), 'Data Loading')
         self.layout.addWidget(tab)
         self.setLayout(self.layout)
 
